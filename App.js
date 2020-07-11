@@ -1,19 +1,24 @@
+/*
+ * @Author: hhhhhq
+ * @Date: 1985-10-26 16:15:00
+ * @LastEditors: hhhhhq
+ * @LastEditTime: 2020-06-19 18:58:36
+ * @Description: file content
+ */ 
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { useFonts } from '@use-expo/font'
+import { AppLoading } from 'expo'
+import Routes from './Routes'
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
-  );
-}
+  let [fontLoaded] = useFonts({
+    'nunito-regular': require('./assets/fonts/Nunito-Regular.ttf'),
+    'nunito-bold': require('./assets/fonts/Nunito-Bold.ttf'),
+  })
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+  if(fontLoaded) {
+    return <Routes />
+  } else {
+    return <AppLoading />
+  }
+}
